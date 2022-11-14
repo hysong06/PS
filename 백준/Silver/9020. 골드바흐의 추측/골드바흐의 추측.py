@@ -18,3 +18,4 @@ for _ in range(int(input())):
             break
         left -= 1
         right += 1
+        
