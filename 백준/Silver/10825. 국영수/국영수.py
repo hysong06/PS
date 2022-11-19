@@ -1,10 +1,9 @@
 import sys
 
 input = sys.stdin.readline
-N = int(input())
 scores = dict()
 
-for _ in range(N):
+for _ in range(int(input())):
     name, kor, eng, math = input().split()
     scores[name] = (int(kor), int(eng), int(math))
 
