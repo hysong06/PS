@@ -1,13 +1,13 @@
-import math
 import sys
 
 input = sys.stdin.readline
 n, m = map(int, input().split())
 
 
+# return the number of factor in factorial(src).
 def count_factor(src: int, factor: int) -> int:
     count = 0
-    while src > 1:
+    while src != 0:
         src //= factor
         count += src
     return count
