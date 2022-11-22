@@ -41,7 +41,7 @@ def solution(string: str) -> tuple:
     """
     for second answer:
         calculate the expression,
-        and replace each number in it with word if possible.
+        and replace each number in it with word.
     """
     deq = collections.deque()  # if expr == "123+456", deq == [123, "+", 456]
 
