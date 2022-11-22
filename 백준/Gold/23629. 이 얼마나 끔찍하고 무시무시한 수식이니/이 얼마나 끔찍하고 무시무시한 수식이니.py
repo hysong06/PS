@@ -15,30 +15,36 @@ dic = {
     "9": "NINE",
 }
 impossible = "Madness!"
-string = input().rstrip("\n")
 
-# for first answer:
-# make a mathematical expression
-# by replacing each word in string with number.
-expr = string[:]
-for num, word in dic.items():
-    expr = expr.replace(word, num)
 
-# for second answer:
-# calculate the expression,
-# and replace each number in it with word if possible.
-def calculate() -> str:
-    global impossible, expr
+def solution(string: str) -> tuple:
     operations = {"+", "-", "x", "/"}
 
+    """
+    for first answer:
+        make a mathematical expression
+        by replacing each word in string with number.
+    """
+    expr = string[:]
+    for num, word in dic.items():
+        expr = expr.replace(word, num)
+
+    # check whether the expression is well-transformed.
     for e in expr:
-        if e.isupper():  # if the string is not transformed appopriately
-            return impossible
+        if e.isupper():
+            return (impossible,)
+
     for i in range(len(expr) - 1):
         if (expr[i] in operations and expr[i + 1] in operations) or expr[i] == "=":
-            return impossible
+            return (impossible,)
 
+    """
+    for second answer:
+        calculate the expression,
+        and replace each number in it with word if possible.
+    """
     deq = collections.deque()  # if expr == "123+456", deq == [123, "+", 456]
+
     i, j = 0, -1
     while j < len(expr) - 1:
         j += 1
@@ -62,15 +68,11 @@ def calculate() -> str:
         elif op == "/":
             deq.appendleft(int(a / b))
 
-    return str(deq[0])
-
-
-result = calculate()
-if result != impossible:
+    result = str(deq[0])
     for num, word in dic.items():
         result = result.replace(num, word)
 
-# print the answers.
-if result != impossible:
-    print(expr)
-print(result)
+    return (expr, result)
+
+
+print(*solution(input().rstrip("\n")), sep="\n")
