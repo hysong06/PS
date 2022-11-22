@@ -1,23 +1,21 @@
 import collections
 import sys
 
-input = sys.stdin.readline
-dic = {
-    "0": "ZERO",
-    "1": "ONE",
-    "2": "TWO",
-    "3": "THREE",
-    "4": "FOUR",
-    "5": "FIVE",
-    "6": "SIX",
-    "7": "SEVEN",
-    "8": "EIGHT",
-    "9": "NINE",
-}
-impossible = "Madness!"
-
 
 def solution(string: str) -> tuple:
+    dic = {
+        "0": "ZERO",
+        "1": "ONE",
+        "2": "TWO",
+        "3": "THREE",
+        "4": "FOUR",
+        "5": "FIVE",
+        "6": "SIX",
+        "7": "SEVEN",
+        "8": "EIGHT",
+        "9": "NINE",
+    }
+    impossible = "Madness!"
     operations = {"+", "-", "x", "/"}
 
     """
@@ -29,7 +27,9 @@ def solution(string: str) -> tuple:
     for num, word in dic.items():
         expr = expr.replace(word, num)
 
-    # check whether the expression is well-transformed.
+    """
+    check whether the expression is well-transformed.
+    """
     for e in expr:
         if e.isupper():
             return (impossible,)
@@ -75,4 +75,6 @@ def solution(string: str) -> tuple:
     return (expr, result)
 
 
+# main
+input = sys.stdin.readline
 print(*solution(input().rstrip("\n")), sep="\n")
