@@ -15,8 +15,8 @@ def solution(string: str) -> tuple:
         "8": "EIGHT",
         "9": "NINE",
     }
-    impossible = "Madness!"
     operations = {"+", "-", "x", "/"}
+    impossible = "Madness!"
 
     """
     for first answer:
@@ -50,10 +50,10 @@ def solution(string: str) -> tuple:
         j += 1
         if expr[j] not in operations:
             continue
-        deq.append(int("".join(expr[i:j])))
+        deq.append(int(expr[i:j]))
         deq.append(expr[j])
         i = j + 1
-    deq.append(int("".join(expr[i:j])))
+    deq.append(int(expr[i:j]))
 
     while len(deq) > 1:
         a = deq.popleft()
