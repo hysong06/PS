@@ -14,7 +14,8 @@ v1, v2 = map(int, input().split())
 
 def dijkstra(start: int) -> list[int]:
     dist = [float("inf")] * (N + 1)
-    heap = [((dist[start] := 0), start)]
+    dist[start] = 0
+    heap = [(dist[start], start)]
 
     while heap:
         cost_sum, node = heapq.heappop(heap)
