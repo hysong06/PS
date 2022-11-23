@@ -12,32 +12,24 @@ for _ in range(E):
 v1, v2 = map(int, input().split())
 
 
-def dijkstra(start: int, end: int) -> int:
-    visit = set()
+def dijkstra(start: int) -> list[int]:
+    dist = [float("inf")] * (N + 1)
+    dist[start] = 0
     heap = [(0, start)]
 
     while heap:
         cost_sum, node = heapq.heappop(heap)
-        if node == end:
-            return cost_sum
-        if node in visit:
-            continue
-
-        visit.add(node)
         for (link, cost) in graph[node]:
-            heapq.heappush(heap, (cost + cost_sum, link))
+            alt = cost + cost_sum
+            if alt <= dist[link]:
+                dist[link] = alt
+                heapq.heappush(heap, (cost + cost_sum, link))
 
-    return -1
+    return dist
 
 
-path1 = [dijkstra(1, v1), dijkstra(v1, v2), dijkstra(v2, N)]
-path2 = [dijkstra(1, v2), dijkstra(v2, v1), dijkstra(v1, N)]
-
-if -1 in path1 and -1 in path2:
-    print(-1)
-elif -1 in path1:
-    print(sum(path2))
-elif -1 in path2:
-    print(sum(path1))
-else:
-    print(min(sum(path1), sum(path2)))
+one_to = dijkstra(1)
+v1_to = dijkstra(v1)
+v2_to = dijkstra(v2)
+answer = min(one_to[v1] + v1_to[v2] + v2_to[N], one_to[v2] + v2_to[v1] + v1_to[N])
+print(-1 if answer == float("inf") else answer)
