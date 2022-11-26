@@ -4,7 +4,7 @@ import sys
 
 input = sys.stdin.readline
 n, m, r = map(int, input().split())
-drops = [0] + list(map(int, input().split()))  # len(drops) == n
+drops = [0] + list(map(int, input().split()))
 graph = collections.defaultdict(list)
 for _ in range(r):
     a, b, l = map(int, input().split())
@@ -27,7 +27,7 @@ def dijkstra(start: int) -> int:
                 dist[nxt] = alt
                 heapq.heappush(heap, (alt, nxt))
 
-    return sum(drops[i] for i in range(1, n + 1) if dist[i] <= m)
+    return sum(drops[i] for i in range(1, n + 1) if dist[i] != float("inf"))
 
 
 print(max(dijkstra(i) for i in range(1, n + 1)))
