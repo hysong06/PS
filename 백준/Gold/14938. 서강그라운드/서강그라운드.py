@@ -19,9 +19,11 @@ def dijkstra(start: int) -> int:
 
     while heap:
         path_len, node = heapq.heappop(heap)
+        if dist[node] < path_len:
+            continue
         for (nxt, length) in graph[node]:
             alt = path_len + length
-            if alt <= dist[nxt] and alt <= m:
+            if alt < dist[nxt] and alt <= m:
                 dist[nxt] = alt
                 heapq.heappush(heap, (alt, nxt))
 
