@@ -2,7 +2,8 @@ import collections
 import sys
 
 
-def solution(string: str) -> tuple:
+def solution(string: str) -> tuple[str]:
+    impossible = "Madness!"  # for exceptional return.
     dic = {
         "0": "ZERO",
         "1": "ONE",
@@ -16,7 +17,6 @@ def solution(string: str) -> tuple:
         "9": "NINE",
     }
     operations = {"+", "-", "x", "/"}
-    impossible = "Madness!"
 
     """
     for first answer:
@@ -27,9 +27,7 @@ def solution(string: str) -> tuple:
     for num, word in dic.items():
         expr = expr.replace(word, num)
 
-    """
-    check whether the expression is well-transformed.
-    """
+    # check whether the expression is well-transformed.
     for e in expr:
         if e.isupper():
             return (impossible,)
@@ -65,7 +63,7 @@ def solution(string: str) -> tuple:
             deq.appendleft(a - b)
         elif op == "x":
             deq.appendleft(a * b)
-        elif op == "/":
+        else:  # if op == "/":
             deq.appendleft(int(a / b))
 
     result = str(deq[0])
@@ -77,4 +75,4 @@ def solution(string: str) -> tuple:
 
 # main
 input = sys.stdin.readline
-print(*solution(input().rstrip("\n")), sep="\n")
+print("\n".join(solution(input().rstrip())))
