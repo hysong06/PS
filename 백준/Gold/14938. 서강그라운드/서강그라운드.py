@@ -4,7 +4,7 @@ import sys
 
 input = sys.stdin.readline
 n, m, r = map(int, input().split())
-drops = [0] + list(map(int, input().split()))
+drops = [0] + list(map(int, input().split()))  # len(drops) == n
 graph = collections.defaultdict(list)
 for _ in range(r):
     a, b, l = map(int, input().split())
@@ -18,10 +18,12 @@ def dijkstra(start: int) -> int:
 
     while heap:
         cur_len, node = heapq.heappop(heap)
+        if node in reachable:
+            continue
         reachable.add(node)
+
         for (nxt, length) in graph[node]:
-            next_len = cur_len + length
-            if nxt in reachable or next_len > m:
+            if nxt in reachable or (next_len := cur_len + length) > m:
                 continue
             heapq.heappush(heap, (next_len, nxt))
 
