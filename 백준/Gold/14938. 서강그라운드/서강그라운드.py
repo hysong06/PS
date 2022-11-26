@@ -14,20 +14,18 @@ for _ in range(r):
 
 def dijkstra(start: int) -> int:
     heap = [(0, start)]
-    dist = [float("inf")] * (n + 1)
-    dist[start] = 0
+    reachable = set()
 
     while heap:
-        path_len, node = heapq.heappop(heap)
-        if dist[node] < path_len:
-            continue
+        cur_len, node = heapq.heappop(heap)
+        reachable.add(node)
         for (nxt, length) in graph[node]:
-            alt = path_len + length
-            if alt < dist[nxt] and alt <= m:
-                dist[nxt] = alt
-                heapq.heappush(heap, (alt, nxt))
+            next_len = cur_len + length
+            if nxt in reachable or next_len > m:
+                continue
+            heapq.heappush(heap, (next_len, nxt))
 
-    return sum(drops[i] for i in range(1, n + 1) if dist[i] != float("inf"))
+    return sum(drops[i] for i in range(1, n + 1) if i in reachable)
 
 
 print(max(dijkstra(i) for i in range(1, n + 1)))
