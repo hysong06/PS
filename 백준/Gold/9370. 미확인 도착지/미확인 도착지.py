@@ -5,7 +5,7 @@ import sys
 input = sys.stdin.readline
 
 for _ in range(int(input())):
-    # initialization
+    # initializations
     n, m, t = map(int, input().split())
     s, g, h = map(int, input().split())
     graph = collections.defaultdict(list)
@@ -37,9 +37,12 @@ for _ in range(int(input())):
     g_to = dijkstra(g)
     h_to = dijkstra(h)
 
-    path1 = [0] + [s_to[h] + h_to[g] + g_to[i] for i in range(1, n + 1)]
-    path2 = [0] + [s_to[g] + g_to[h] + h_to[i] for i in range(1, n + 1)]
     print(
-        *sorted(c for c in candidates if s_to[c] == path1[c] or s_to[c] == path2[c]),
+        *sorted(
+            c
+            for c in candidates
+            if (s_to[c] == s_to[h] + h_to[g] + g_to[c])
+            or (s_to[c] == s_to[g] + g_to[h] + h_to[c])
+        ),
         sep="\n",
     )
