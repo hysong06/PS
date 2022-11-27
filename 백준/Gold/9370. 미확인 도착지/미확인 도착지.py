@@ -37,11 +37,8 @@ for _ in range(int(input())):
     g_to = dijkstra(g)
     h_to = dijkstra(h)
 
-    path1, path2 = g_to[:], h_to[:]
-    for i in range(1, n + 1):
-        path1[i] += s_to[h] + h_to[g]
-        path2[i] += s_to[g] + g_to[h]
-
+    path1 = [0] + [s_to[h] + h_to[g] + g_to[i] for i in range(1, n + 1)]
+    path2 = [0] + [s_to[g] + g_to[h] + h_to[i] for i in range(1, n + 1)]
     print(
         *sorted(c for c in candidates if s_to[c] == path1[c] or s_to[c] == path2[c]),
         sep="\n",
