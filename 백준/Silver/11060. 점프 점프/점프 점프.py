@@ -1,26 +1,15 @@
-import heapq
 import sys
 
 input = sys.stdin.readline
 N = int(input())
 maze = list(map(int, input().split()))
+jumps = [float("inf")] * N  # dp
 
+jumps[0] = 0
+for cur in range(N - 1):
+    for step in range(1, maze[cur] + 1):
+        nxt = cur + step
+        if nxt < N:
+            jumps[nxt] = min(jumps[cur] + 1, jumps[nxt])
 
-def shortest_path() -> int:
-    heap = [(0, 0)]
-    visit = [True] + [False] * (N - 1)
-
-    while heap:
-        jumps, cur = heapq.heappop(heap)
-        if cur == N - 1:
-            return jumps
-        for step in range(1, maze[cur] + 1):
-            nxt = cur + step
-            if nxt < N and not visit[nxt]:
-                visit[nxt] = True
-                heapq.heappush(heap, (jumps + 1, nxt))
-
-    return -1
-
-
-print(shortest_path())
+print(jumps[-1] if jumps[-1] != float("inf") else -1)
