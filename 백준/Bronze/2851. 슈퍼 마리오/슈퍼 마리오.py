@@ -1,14 +1,8 @@
-import bisect
-import sys
+psum, answer = 0, 0  # answer == psum that is closest to 100.
 
-input = sys.stdin.readline
-scores = [int(input()) for _ in range(10)]
-for i in range(1, 10):
-    scores[i] += scores[i - 1]
+for _ in range(10):
+    psum += int(input())
+    if abs(psum - 100) <= abs(answer - 100):
+        answer = max(psum, answer)
 
-idx = max(1, min(bisect.bisect_left(scores, 100), 9))
-print(
-    scores[idx - 1]
-    if abs(scores[idx - 1] - 100) < abs(scores[idx] - 100)
-    else scores[idx]
-)
+print(answer)
