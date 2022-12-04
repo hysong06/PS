@@ -4,8 +4,7 @@ import sys
 
 input = sys.stdin.readline
 N, M = map(int, input().split())
-exposed = list(map(int, input().split()))
-exposed[-1] = 0
+exposed = input().split()
 graph = collections.defaultdict(list)
 for _ in range(M):
     a, b, t = map(int, input().split())
@@ -15,8 +14,8 @@ for _ in range(M):
 
 def dijkstra() -> int:
     heap = [(0, 0)]
-    dist = [float("inf")] * N
-    dist[0] = 0
+    dist = [float("-inf") if exposed[i] == "1" else float("inf") for i in range(N)]
+    dist[0], dist[-1] = 0, float("inf")
 
     while heap:
         time_sum, node = heapq.heappop(heap)
@@ -27,7 +26,7 @@ def dijkstra() -> int:
 
         for (link, time) in graph[node]:
             alt = time_sum + time
-            if alt < dist[link] and not exposed[link]:
+            if alt < dist[link]:
                 dist[link] = alt
                 heapq.heappush(heap, (alt, link))
 
