@@ -22,13 +22,16 @@ def dijkstra() -> int:
         time_sum, node = heapq.heappop(heap)
         if time_sum > dist[node]:
             continue
+        if node == N - 1:
+            return time_sum
+
         for (link, time) in graph[node]:
             alt = time_sum + time
             if alt < dist[link] and not exposed[link]:
                 dist[link] = alt
                 heapq.heappush(heap, (alt, link))
 
-    return -1 if dist[-1] == float("inf") else dist[-1]
+    return -1
 
 
 print(dijkstra())
