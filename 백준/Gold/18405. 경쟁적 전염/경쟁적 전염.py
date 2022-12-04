@@ -1,5 +1,4 @@
 import collections
-import heapq
 import sys
 
 input = sys.stdin.readline
@@ -8,19 +7,15 @@ types = [list(map(int, input().split())) for _ in range(N)]
 S, X, Y = map(int, input().split())
 
 dr, dc = (1, -1, 0, 0), (0, 0, 1, -1)
-queue = collections.deque()
-
-# if virus exsits in (i, j),
-# push (i, j, 0) into queue in the virus order by using heap.
-heap = [(types[i][j], i, j) for i in range(N) for j in range(N) if types[i][j] != 0]
-heapq.heapify(heap)
-while heap:
-    _, i, j = heapq.heappop(heap)
-    queue.append((i, j, 0))
+queue = collections.deque(
+    sorted(
+        (types[i][j], i, j, 0) for i in range(N) for j in range(N) if types[i][j] != 0
+    )
+)
 
 # bfs
 while queue:
-    r, c, time = queue.popleft()
+    virus, r, c, time = queue.popleft()
     if time == S:
         continue
     for i in range(4):
@@ -28,7 +23,7 @@ while queue:
         if nr < 0 or nr >= N or nc < 0 or nc >= N or types[nr][nc] != 0:
             continue
         # virus spreads.
-        types[nr][nc] = types[r][c]
-        queue.append((nr, nc, time + 1))
+        types[nr][nc] = virus
+        queue.append((virus, nr, nc, time + 1))
 
 print(types[X - 1][Y - 1])
