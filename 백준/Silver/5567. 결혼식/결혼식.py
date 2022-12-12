@@ -10,19 +10,12 @@ for _ in range(m):
     graph[a].append(b)
     graph[b].append(a)
 
-
-# bfs
 visit = [False] * (n + 1)
 visit[1] = True
-queue = collections.deque(iterable=[(1, 0)])
 
-while queue:
-    (student, depth) = queue.popleft()
-    if depth == 2:
-        continue
-    for friend in graph[student]:
-        if not visit[friend]:
-            queue.append((friend, depth + 1))
-            visit[friend] = True
+for f in graph[1]:  # friend
+    visit[f] = True
+    for fof in graph[f]:  # friend of friend
+        visit[fof] = True
 
 print(visit.count(True) - 1)  # do not count SangGeun.
