@@ -10,12 +10,10 @@ for _ in range(m):
     graph[a].append(b)
     graph[b].append(a)
 
-visit = [False] * (n + 1)
-visit[1] = True
-
+visit = {1}
 for f in graph[1]:  # friend
-    visit[f] = True
+    visit.add(f)
     for fof in graph[f]:  # friend of friend
-        visit[fof] = True
+        visit.add(fof)
 
-print(visit.count(True) - 1)  # do not count SangGeun.
+print(len(visit) - 1)  # do not count SangGeun.
