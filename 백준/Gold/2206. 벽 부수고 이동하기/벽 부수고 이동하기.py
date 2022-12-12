@@ -3,7 +3,7 @@ import sys
 
 input = sys.stdin.readline
 N, M = map(int, input().split())
-wall = [list(map(lambda x: bool(int(x)), input().rstrip("\n"))) for _ in range(N)]
+wall = [input().rstrip("\n") for _ in range(N)]
 
 # bfs
 """
@@ -26,7 +26,7 @@ while queue:
         nr, nc = r + dr, c + dc
         if nr < 0 or nr >= N or nc < 0 or nc >= M:
             continue
-        if not wall[nr][nc]:
+        if wall[nr][nc] == "0":
             if dist[crushed][nr][nc] == 0:
                 queue.append((crushed, nr, nc))
                 dist[crushed][nr][nc] = dist[crushed][r][c] + 1
