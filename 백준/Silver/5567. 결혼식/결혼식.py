@@ -17,7 +17,7 @@ visit[1] = True
 queue = collections.deque(iterable=[(1, 0)])
 
 while queue:
-    student, depth = queue.popleft()
+    (student, depth) = queue.popleft()
     if depth == 2:
         continue
     for friend in graph[student]:
