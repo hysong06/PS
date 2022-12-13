@@ -22,7 +22,7 @@ while queue:
         print(dist[crushed][r][c])
         break
 
-    for dr, dc in delta:
+    for (dr, dc) in delta:
         nr, nc = r + dr, c + dc
         if nr < 0 or nr >= N or nc < 0 or nc >= M:
             continue
