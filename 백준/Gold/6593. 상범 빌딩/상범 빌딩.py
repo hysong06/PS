@@ -16,8 +16,7 @@ while True:
     delta = ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1))
     queue = collections.deque()
 
-    # find the start point.
-    for k in range(L):
+    for k in range(L):  # find the start point.
         for i in range(R):
             for j in range(C):
                 if cube[k][i][j] == "S":
