@@ -4,20 +4,19 @@ import sys
 input = sys.stdin.readline
 N = int(input())
 S = [collections.deque(iterable=input().split()) for _ in range(N)]
-L = collections.deque(iterable=input().split())
+L = input().split()
 
 
 def solution() -> str:
-    while L:
+    for finding in L:
         for sentence in S:
-            if sentence and sentence[0] == L[0]:
+            if sentence and sentence[0] == finding:
                 sentence.popleft()
-                L.popleft()
                 break
-        else:  # if there is no L[0] in any sentences
+        else:  # if there is no 'finding' in any sentences
             return "Impossible"
 
-    for sentence in S:  # if not all sentences are written
+    for sentence in S:  # if not all words are written
         if sentence:
             return "Impossible"
 
