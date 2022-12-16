@@ -16,7 +16,7 @@ def solution() -> str:
         else:  # if there is no 'finding' in any sentences
             return "Impossible"
 
-    for sentence in S:  # if not all words are written
+    for sentence in S:  # if not all words are written by cseteram
         if sentence:
             return "Impossible"
 
