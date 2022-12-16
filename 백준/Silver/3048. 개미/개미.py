@@ -2,10 +2,10 @@ import sys
 
 input = sys.stdin.readline
 N1, N2 = map(int, input().split())
-group1 = input().rstrip("\n")[::-1]
+group1 = input().rstrip("\n")
 group2 = input().rstrip("\n")
 T = int(input())
-order = list(group1 + group2)
+order = list(group1[::-1] + group2)
 
 # solution
 for _ in range(T):
