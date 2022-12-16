@@ -9,17 +9,18 @@ L = collections.deque(iterable=input().split())
 
 def solution() -> str:
     while L:
-        prev_len = len(L)
-        for i in range(N):
-            while S[i] and L and S[i][0] == L[0]:
-                S[i].popleft()
+        for sentence in S:
+            if sentence and sentence[0] == L[0]:
+                sentence.popleft()
                 L.popleft()
-        if prev_len == len(L):
+                break
+        else:  # if there is no L[0] in any sentences
             return "Impossible"
 
-    for q in S:
-        if q:
+    for sentence in S:  # if not all sentences are written
+        if sentence:
             return "Impossible"
+
     return "Possible"
 
 
