@@ -1,7 +1,6 @@
 import collections
 import sys
 
-sys.setrecursionlimit(200_001)
 input = sys.stdin.readline
 N, M = map(int, input().split())
 allies = collections.defaultdict(set)
@@ -13,11 +12,21 @@ C, H, K = map(int, input().split())
 visit = [False] * (N + 1)
 
 
-def get_group_size(country: int) -> int:
-    if visit[country]:
-        return 0
-    visit[country] = True
-    return 1 + sum(get_group_size(ally) for ally in allies[country] if not visit[ally])
+def get_group_size(start: int) -> int:
+    stack = [start]
+    group_size = 0
+
+    while stack:  # dfs
+        cur = stack.pop()
+        if visit[cur]:
+            continue
+        visit[cur] = True
+        group_size += 1
+        for link in allies[cur]:
+            if not visit[link]:
+                stack.append(link)
+
+    return group_size
 
 
 get_group_size(H)  # just visit check of the allies of Hansol's kingdom.
