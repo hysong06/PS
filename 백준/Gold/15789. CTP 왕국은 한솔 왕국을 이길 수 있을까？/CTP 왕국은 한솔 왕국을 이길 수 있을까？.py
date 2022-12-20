@@ -13,18 +13,17 @@ visit = [False] * (N + 1)
 
 
 def get_group_size(start: int) -> int:
-    stack = [start]
-    group_size = 0
+    queue = collections.deque(iterable=[start])
+    visit[start] = True
+    group_size = 1
 
-    while stack:  # dfs
-        cur = stack.pop()
-        if visit[cur]:
-            continue
-        visit[cur] = True
-        group_size += 1
+    while queue:  # bfs
+        cur = queue.pop()
         for link in allies[cur]:
             if not visit[link]:
-                stack.append(link)
+                queue.append(link)
+                visit[link] = True
+                group_size += 1
 
     return group_size
 
