@@ -11,7 +11,7 @@ for i, alpha in enumerate(S):
     counts[alpha][i] += 1
 
 for count in counts.values():
-    # get the prefix-sum list of each alphabet in S.
+    # make the prefix-sum list of each alphabet in S.
     for i in range(1, len(S)):
         count[i] += count[i - 1]
 
