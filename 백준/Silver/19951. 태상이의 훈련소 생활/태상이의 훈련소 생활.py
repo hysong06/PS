@@ -12,7 +12,8 @@ for _ in range(M):
     variance[a - 1] += k
     variance[b] -= k
 
-for i in range(1, N):
-    variance[i] += variance[i - 1]  # prefix sum
+for i in range(N):
+    heights[i] += variance[i]
+    variance[i + 1] += variance[i]
 
-print(*map(sum, zip(heights, variance)))
+print(*heights)
