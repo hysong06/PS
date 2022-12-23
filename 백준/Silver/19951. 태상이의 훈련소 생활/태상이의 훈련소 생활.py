@@ -14,6 +14,6 @@ for _ in range(M):
 
 for i in range(N):
     heights[i] += variance[i]
-    variance[i + 1] += variance[i]
+    variance[i + 1] += variance[i]  # prefix sum
 
 print(*heights)
