@@ -2,16 +2,17 @@ import re
 import sys
 
 
+def integral(term: str) -> str:
+    if term.isdigit():
+        return ("" if term == "1" else term) + "x"
+    else:
+        c = term[:-1]  # coefficient
+        return ("" if c == "2" else str(int(c) // 2)) + "xx"
+
+
 def solution(expr: str) -> str:
     if expr == "0":
         return "W"
-
-    def integral(term: str) -> str:
-        if term.isdigit():
-            return ("" if term == "1" else term) + "x"
-        else:
-            c = term[:-1]  # coefficient
-            return ("" if c == "2" else str(int(c) // 2)) + "xx"
 
     result = ""
     if expr[0] == "-":
