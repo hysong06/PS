@@ -6,7 +6,7 @@ n = int(input())
 heap = [1] * n
 
 for _ in range(n):
-    a, *values = list(map(int, input().split()))
+    a, *values = map(int, input().split())
     if a == 0:
         print(-heapq.heappop(heap))
         continue
