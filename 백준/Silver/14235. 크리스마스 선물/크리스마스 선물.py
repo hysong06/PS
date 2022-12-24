@@ -3,12 +3,12 @@ import sys
 
 input = sys.stdin.readline
 n = int(input())
-heap = []
+heap = [1] * n
 
 for _ in range(n):
     a, *values = list(map(int, input().split()))
     if a == 0:
-        print(-heapq.heappop(heap) if heap else -1)
+        print(-heapq.heappop(heap))
         continue
 
     for value in values:
