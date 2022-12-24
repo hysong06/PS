@@ -1,6 +1,2 @@
-[Baekjoon Online Judge] <br>
-https://www.acmicpc.net/user/hysong <br>
-https://solved.ac/profile/hysong <br>
-
-[LeetCode] <br>
-https://leetcode.com/hysong_/
+[Baekjoon Online Judge]<br>
+[![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=hysong)](https://solved.ac/hysong/)
