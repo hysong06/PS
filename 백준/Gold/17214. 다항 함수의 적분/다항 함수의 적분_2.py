@@ -10,9 +10,10 @@ def integral(term: str) -> str:
         return ("" if c == "2" else str(int(c) // 2)) + "xx"
 
 
-def solution(expr: str) -> str:
+def solution(expr: str) -> None:
     if expr == "0":
-        return "W"
+        print("W")
+        return
 
     result = ""
     if expr[0] == "-":
@@ -25,7 +26,7 @@ def solution(expr: str) -> str:
     for term, oper in zip(terms[:-1], operators):
         result += integral(term)
         result += oper
-    return result + integral(terms[-1]) + "+W"
+    print(result + integral(terms[-1]) + "+W")
 
 
-print(solution(sys.stdin.readline().rstrip("\n")))
+solution(sys.stdin.readline().rstrip("\n"))
