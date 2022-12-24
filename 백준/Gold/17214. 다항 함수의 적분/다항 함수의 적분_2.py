@@ -6,6 +6,13 @@ def solution(expr: str) -> str:
     if expr == "0":
         return "W"
 
+    def integral(term: str) -> str:
+        if term.isdigit():
+            return ("" if term == "1" else term) + "x"
+        else:
+            c = term[:-1]  # coefficient
+            return ("" if c == "2" else str(int(c) // 2)) + "xx"
+
     result = ""
     if expr[0] == "-":
         result += expr[0]
@@ -13,13 +20,6 @@ def solution(expr: str) -> str:
 
     terms = re.split("[+-]", expr)
     operators = [e for e in expr if e == "+" or e == "-"]
-
-    def integral(term: str) -> str:
-        if term.isdigit():
-            return ("" if term == "1" else term) + "x"
-        else:
-            c = term[:-1]  # coefficient
-            return ("" if c == "2" else str(int(c) // 2)) + "xx"
 
     for term, oper in zip(terms[:-1], operators):
         result += integral(term)
