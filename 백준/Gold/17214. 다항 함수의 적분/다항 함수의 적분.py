@@ -13,7 +13,7 @@ def integral(expr: str) -> str:
         while r < len(expr) and expr[r] != "+" and expr[r] != "-":
             r += 1
 
-        # 2. process the signs.
+        # 2. process the sign.
         if expr[l] == "+" or expr[l] == "-":
             result += expr[l]
             l += 1
@@ -26,7 +26,7 @@ def integral(expr: str) -> str:
             c = term[:-1]
             result += "xx" if c == "2" else str(int(c) // 2) + "xx"
 
-        # 4. find the next term if exist.
+        # 4. find the next signed-term.
         l = r
         r = l + 1
 
