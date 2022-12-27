@@ -2,9 +2,8 @@ import re
 import sys
 
 input = sys.stdin.readline
+N = int(input())
 print(
-    *sorted(
-        int(num) for _ in range(int(input())) for num in re.findall("\d+", input())
-    ),
+    *sorted(num for _ in range(N) for num in map(int, re.findall("\d+", input()))),
     sep="\n"
 )
