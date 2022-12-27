@@ -1,4 +1,4 @@
 import sys
 
-lines = list(map(lambda x: x.rstrip("\n"), sys.stdin.readlines()))
-print(sum(map(int, ("".join(lines)).split(","))))
+S = "".join(map(lambda x: x.rstrip(), sys.stdin.readlines()))
+print(sum(map(int, S.split(","))))
