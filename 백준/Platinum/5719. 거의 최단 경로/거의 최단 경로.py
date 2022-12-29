@@ -35,7 +35,8 @@ while True:
 
     # remove the routes in the shortest path using reversed-bfs.
     shortest = dijkstra(S)
-    queue = collections.deque([(D, 0)])
+    queue = collections.deque()
+    queue.append((D, 0))
 
     while queue:
         cur, cur_to_D = queue.popleft()
@@ -44,7 +45,7 @@ while True:
                 continue
             path_len = shortest[prev] + graph[prev][cur] + cur_to_D
             if path_len == shortest[D]:
-                queue.append((prev, cur_to_D + graph[prev][cur]))
+                queue.append((prev, graph[prev][cur] + cur_to_D))
                 del graph[prev][cur]
 
     answer = dijkstra(S)[D]
