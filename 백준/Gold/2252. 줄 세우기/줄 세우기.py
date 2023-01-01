@@ -11,14 +11,14 @@ for _ in range(M):
     indegree[B] += 1
 
 order = []
-queue = collections.deque([i for i in range(1, N + 1) if indegree[i] == 0])
+stack = [i for i in range(1, N + 1) if indegree[i] == 0]
 
-while queue:
-    cur = queue.popleft()
+while stack:
+    cur = stack.pop()
     order.append(cur)
     for nxt in graph[cur]:
         indegree[nxt] -= 1  # remove the edge (cur, link)
         if indegree[nxt] == 0:
-            queue.append(nxt)
+            stack.append(nxt)
 
 print(*order)
