@@ -29,23 +29,26 @@ while queue:
         if indegree[nxt] == 0:
             queue.append(nxt)
 
+max_len = start_to[end]
+
 
 """ count the edges in the longest path(s). """
-queue.append(end)
+queue.append((end, 0))
 visit = [False] * (n + 1)
 visit[end] = True
 counts = 0
 
 while queue:
-    cur = queue.popleft()
+    cur, cur_to_end = queue.popleft()
     for prev in prevs[cur]:
-        if start_to[prev] + graph[prev][cur] == start_to[cur]:
+        prev_to_end = graph[prev][cur] + cur_to_end
+        if start_to[prev] + prev_to_end == max_len:
             counts += 1
             if not visit[prev]:
                 visit[prev] = True
-                queue.append(prev)
+                queue.append((prev, prev_to_end))
 
 
 """ answers """
-print(start_to[end])
+print(max_len)
 print(counts)
