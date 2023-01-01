@@ -9,18 +9,17 @@ for _ in range(int(input())):
     graph[A].append(B)
     indegree[B] += 1
 
-order = []
 waitings = sorted(item for item in graph if indegree[item] == 0)
+order = waitings[:]
 
 while waitings:
-    order.extend(waitings)
-
     temp = []
     for cur in waitings:
         for nxt in graph[cur]:
             indegree[nxt] -= 1
             if indegree[nxt] == 0:
                 temp.append(nxt)
-    waitings = sorted(temp)
+    order += (waitings := sorted(temp))
 
-print("\n".join(order) if len(order) == len(set(graph) | set(indegree)) else -1)
+# all items are in graph.keys() now.
+print("\n".join(order) if len(order) == len(graph) else -1)
