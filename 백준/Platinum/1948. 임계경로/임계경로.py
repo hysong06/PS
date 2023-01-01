@@ -31,7 +31,7 @@ while queue:
 
 
 """ dp[i] == the longest path from start to i. """
-""" prevs can get the longest path from end to start. """
+""" can get the longest path from end to start using prevs. """
 dp = [0] * (n + 1)
 prevs = collections.defaultdict(list)
 
