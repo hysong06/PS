@@ -1,7 +1,7 @@
 import sys
 
 input = sys.stdin.readline
-word = input().rstrip("\n")
+word = input().rstrip()
 results = []
 
 for i in range(1, len(word) - 1):
