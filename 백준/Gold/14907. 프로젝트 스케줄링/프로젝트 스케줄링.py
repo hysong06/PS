@@ -1,26 +1,27 @@
-import collections
 import heapq
 import sys
 
-""" inits """
-graph = collections.defaultdict(list)
-cost = dict()
-indegree = dict()
+take_time = [0] * 26  # can exist-check.
+indegree = [0] * 26
+graph = [[] for _ in range(26)]
 
 for line in sys.stdin.readlines():
     data = line.split()
-    cur, time, prevs = data[0], int(data[1]), data[-1]
+    cur, cost, prevs = (
+        ord(data[0]) - 65,
+        int(data[1]),
+        tuple(map(lambda e: ord(e) - 65, data[-1])),
+    )
 
-    cost[cur] = time
-    if len(data) == 2:  # if there is no prevs
-        continue
-    indegree[cur] = len(prevs)
-    for prev in prevs:
-        graph[prev].append(cur)
+    take_time[cur] = cost
+    if len(data) == 3:
+        indegree[cur] = len(prevs)
+        for prev in prevs:
+            graph[prev].append(cur)
 
 
 """ topology sort """
-heap = [(cost[k], k) for k in graph if k not in indegree]
+heap = [(take_time[k], k) for k in range(26) if take_time[k] != 0 and indegree[k] == 0]
 heapq.heapify(heap)
 
 while heap:
@@ -28,7 +29,7 @@ while heap:
     for nxt in graph[cur]:
         indegree[nxt] -= 1
         if indegree[nxt] == 0:
-            cost[nxt] += path_len
-            heapq.heappush(heap, (cost[nxt], nxt))
+            take_time[nxt] += path_len
+            heapq.heappush(heap, (take_time[nxt], nxt))
 
-print(max(cost.values()))
+print(max(take_time))
