@@ -1,32 +1,23 @@
-import collections
 import sys
 
+sys.setrecursionlimit(10**5)
 input = sys.stdin.readline
+
 for _ in range(int(input())):
-
-    """inits"""
     N, K = map(int, input().split())
-    graph = [[] for _ in range(N + 1)]
-    indegree = [-1] + [0] * N
     cost = [0] + list(map(int, input().split()))
-
+    prevs = [[] for _ in range(N + 1)]
     for _ in range(K):
         X, Y = map(int, input().split())
-        graph[X].append(Y)
-        indegree[Y] += 1
-
+        prevs[Y].append(X)
     W = int(input())
+    take_time = [-1] * (N + 1)
 
-    """ topology sort """
-    queue = collections.deque([i for i in range(1, N + 1) if indegree[i] == 0])
-    take_time = cost[:]
+    def dfs(cur: int) -> int:
+        if take_time[cur] == -1:
+            take_time[cur] = cost[cur] + (
+                max(dfs(prev) for prev in prevs[cur]) if prevs[cur] else 0
+            )
+        return take_time[cur]
 
-    while queue:
-        cur = queue.popleft()
-        for nxt in graph[cur]:
-            indegree[nxt] -= 1
-            take_time[nxt] = max(take_time[cur] + cost[nxt], take_time[nxt])
-            if indegree[nxt] == 0:
-                queue.append(nxt)
-
-    print(take_time[W])
+    print(dfs(W))
