@@ -1,6 +1,6 @@
 import sys
 
-sys.setrecursionlimit(10**5)
+sys.setrecursionlimit(10_000)
 input = sys.stdin.readline
 
 for _ in range(int(input())):
@@ -11,13 +11,12 @@ for _ in range(int(input())):
         X, Y = map(int, input().split())
         prevs[Y].append(X)
     W = int(input())
-    take_time = [-1] * (N + 1)
+    visit = [False] * (N + 1)
 
     def dfs(cur: int) -> int:
-        if take_time[cur] == -1:
-            take_time[cur] = cost[cur] + (
-                max(dfs(prev) for prev in prevs[cur]) if prevs[cur] else 0
-            )
-        return take_time[cur]
+        if not visit[cur]:
+            visit[cur] = True
+            cost[cur] += max(dfs(prev) for prev in prevs[cur]) if prevs[cur] else 0
+        return cost[cur]
 
     print(dfs(W))
