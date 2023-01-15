@@ -1,10 +1,21 @@
-n = int(input())
-dp = [float("inf")] * (n + 1)
+def solution(n: int) -> int:
+    sqrt_n = int(n**0.5)
 
-dp[0], dp[1] = 0, 1
-for target in range(2, n + 1):
-    for k in range(1, int(target**0.5) + 1):
-        need = target - k**2
-        dp[target] = min(dp[need] + 1, dp[target])
+    if n == sqrt_n**2:
+        return 1
 
-print(dp[n])
+    for a in range(1, sqrt_n + 1):
+        b = int((n - a**2) ** 0.5)
+        if n == a**2 + b**2:
+            return 2
+
+    for a in range(1, sqrt_n + 1):
+        for b in range(a, int((n - a**2) ** 0.5) + 1):
+            c = int((n - a**2 - b**2) ** 0.5)
+            if n == a**2 + b**2 + c**2:
+                return 3
+
+    return 4
+
+
+print(solution(int(input())))
