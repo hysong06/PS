@@ -2,7 +2,7 @@ import sys
 
 input = sys.stdin.readline
 head, tail = [], []
-latest = []  # 0 if front else -1
+latest = []  # append (0 if front else -1)
 
 for i in range(int(input())):
     cmd, *alpha = input().split()
@@ -19,4 +19,5 @@ for i in range(int(input())):
     elif latest:
         head.pop() if latest.pop() == 0 else tail.pop()
 
-print(("".join(head[::-1]) + "".join(tail)) or 0)
+
+print("".join(head[::-1] + tail) or 0)
