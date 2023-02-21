@@ -19,6 +19,4 @@ for i in range(int(input())):
     elif latest:
         head.pop() if latest.pop() == 0 else tail.pop()
 
-
-result = "".join(head[::-1]) + "".join(tail)
-print(result if result else 0)
+print(("".join(head[::-1]) + "".join(tail)) or 0)
