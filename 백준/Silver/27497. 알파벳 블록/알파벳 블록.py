@@ -1,23 +1,24 @@
 import sys
-import collections
 
 input = sys.stdin.readline
-result = collections.deque()
-trace = []  # 0 if front else -1
+head, tail = [], []
+latest = []  # 0 if front else -1
 
-for _ in range(int(input())):
+for i in range(int(input())):
     cmd, *alpha = input().split()
-    if cmd == "1":
-        result.append(alpha[0])
-        trace.append(-1)
-    elif cmd == "2":
-        result.appendleft(alpha[0])
-        trace.append(0)
-    elif trace:
-        latest = trace.pop()
-        if latest == 0:
-            result.popleft()
-        else:
-            result.pop()
 
-print("".join(result) if result else 0)
+    # add a new block.
+    if cmd == "1":
+        tail.append(alpha[0])
+        latest.append(-1)
+    elif cmd == "2":
+        head.append(alpha[0])
+        latest.append(0)
+
+    # remove the latest-added block.
+    elif latest:
+        head.pop() if latest.pop() == 0 else tail.pop()
+
+
+result = "".join(head[::-1]) + "".join(tail)
+print(result if result else 0)
