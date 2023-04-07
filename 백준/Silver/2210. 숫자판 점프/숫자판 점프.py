@@ -14,8 +14,7 @@ while stack:
 
     for (dr, dc) in ((1, 0), (0, 1), (-1, 0), (0, -1)):
         nr, nc = r + dr, c + dc
-        if nr < 0 or nr >= 5 or nc < 0 or nc >= 5:
-            continue
-        stack.append((nr, nc, path + board[nr][nc]))
+        if 0 <= nr < 5 and 0 <= nc < 5:
+            stack.append((nr, nc, path + board[nr][nc]))
 
 print(len(results))
