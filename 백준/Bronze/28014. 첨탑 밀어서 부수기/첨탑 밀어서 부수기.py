@@ -1,12 +1,10 @@
-import sys
+input()
+count = 0  # must push the first tower
+prev = 0
 
-input = sys.stdin.readline
-N = int(input())
-heights = list(map(int, input().split()))
-push = 1  # must push the first tower
+for cur in map(int, input().split()):
+    if prev <= cur:
+        count += 1
+    prev = cur
 
-for i in range(len(heights) - 1):
-    if heights[i] <= heights[i + 1]:
-        push += 1
-
-print(push)
+print(count)
