@@ -2,7 +2,7 @@ import sys
 
 input = sys.stdin.readline
 N = int(input())
-heights = tuple(map(int, input().split()))
+heights = list(map(int, input().split()))
 count = 0
 p = 0
 
