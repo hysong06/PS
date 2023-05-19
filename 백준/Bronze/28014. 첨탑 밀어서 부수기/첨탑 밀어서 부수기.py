@@ -10,8 +10,10 @@ while p < len(heights):
     count += 1
 
     i = p
-    while i < len(heights) - 1 and heights[i] > heights[i + 1]:
-        i += 1
-    p = i + 1
+    j = i + 1
+    while j < len(heights) and heights[i] > heights[j]:
+        i, j = i + 1, j + 1
+
+    p = j
 
 print(count)
