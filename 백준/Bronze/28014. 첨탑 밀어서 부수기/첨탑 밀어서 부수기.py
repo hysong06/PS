@@ -9,11 +9,9 @@ p = 0
 while p < len(heights):
     count += 1
 
-    i = p
-    j = i + 1
+    i, j = p, p + 1
     while j < len(heights) and heights[i] > heights[j]:
-        i += 1
-        j += 1
+        i, j = i + 1, j + 1
 
     p = j
 
