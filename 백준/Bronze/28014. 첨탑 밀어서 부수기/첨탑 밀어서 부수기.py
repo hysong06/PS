@@ -3,16 +3,10 @@ import sys
 input = sys.stdin.readline
 N = int(input())
 heights = list(map(int, input().split()))
-count = 0
-p = 0
+push = 1  # must push the first tower
 
-while p < len(heights):
-    count += 1
+for i in range(len(heights) - 1):
+    if heights[i] <= heights[i + 1]:
+        push += 1
 
-    i, j = p, p + 1
-    while j < len(heights) and heights[i] > heights[j]:
-        i, j = i + 1, j + 1
-
-    p = j
-
-print(count)
+print(push)
