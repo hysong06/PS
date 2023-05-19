@@ -1,5 +1,8 @@
+import sys
+
+input = sys.stdin.readline
 input()
-count = 0  # must push the first tower
+count = 0
 prev = 0
 
 for cur in map(int, input().split()):
