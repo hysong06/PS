@@ -12,7 +12,8 @@ while p < len(heights):
     i = p
     j = i + 1
     while j < len(heights) and heights[i] > heights[j]:
-        i, j = i + 1, j + 1
+        i += 1
+        j += 1
 
     p = j
 
