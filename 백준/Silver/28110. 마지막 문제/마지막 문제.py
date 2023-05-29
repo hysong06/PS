@@ -12,10 +12,8 @@ def solution():
     for i in range(N - 1):
         a, b = difficulties[i], difficulties[i + 1]
         mid = (a + b) // 2
-        diff = mid - a
+        diff = mid - a  # min - a is smaller than b - min
 
-        if diff == 0:
-            continue
         if diff > max_diff:
             answer, max_diff = mid, diff
 
