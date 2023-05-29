@@ -9,7 +9,8 @@ def solution():
     answer = -1
     max_diff = 0
 
-    for a, b in zip(difficulties[:-1], difficulties[1:]):
+    for i in range(N - 1):
+        a, b = difficulties[i], difficulties[i + 1]
         mid = (a + b) // 2
         diff = mid - a
 
