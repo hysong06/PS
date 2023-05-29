@@ -10,12 +10,11 @@ def solution():
     max_diff = 0
 
     for a, b in zip(difficulties[:-1], difficulties[1:]):
-        if b - a == 1:
-            continue
-
         mid = (a + b) // 2
         diff = mid - a
 
+        if diff == 0:
+            continue
         if diff > max_diff:
             answer, max_diff = mid, diff
 
