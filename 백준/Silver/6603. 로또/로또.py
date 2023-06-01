@@ -11,7 +11,7 @@ while True:
             print(*stack)
             return
 
-        for nxt in range(cur + 1, k):
+        for nxt in range(cur + 1, k - (6 - depth) + 1):
             stack.append(S[nxt])
             solve(depth + 1, nxt)
             stack.pop()
