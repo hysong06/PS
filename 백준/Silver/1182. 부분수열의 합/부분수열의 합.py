@@ -11,4 +11,4 @@ def solve(total, i):
     return solve(total, i + 1) + solve(total + nums[i], i + 1)
 
 
-print(solve(0, 0) - (1 if S == 0 else 0))
+print(solve(0, 0) - 1 if S == 0 else solve(0, 0))
