@@ -1,17 +1,15 @@
 import sys
 
 input = sys.stdin.readline
-sum_odds = 0
-min_odds = 100
+odds = []
 
 for _ in range(7):
     num = int(input())
     if num % 2 == 1:
-        sum_odds += num
-        min_odds = min(num, min_odds)
+        odds.append(num)
 
-if sum_odds == 0:
-    print(-1)
+if odds:
+    print(sum(odds))
+    print(min(odds))
 else:
-    print(sum_odds)
-    print(min_odds)
+    print(-1)
