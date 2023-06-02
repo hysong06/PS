@@ -3,7 +3,12 @@ import sys
 input = sys.stdin.readline
 input()
 calls = list(map(int, input().split()))
+ys = sum(map(lambda x: 10 * (x // 30 + 1), calls))
+ms = sum(map(lambda x: 15 * (x // 60 + 1), calls))
 
-ys = sum(10 * (call // 30 + 1) for call in calls)
-ms = sum(15 * (call // 60 + 1) for call in calls)
-print(f"Y M {ys}" if ys == ms else (f"Y {ys}" if ys < ms else f"M {ms}"))
+if ys < ms:
+    print("Y", ys)
+elif ys > ms:
+    print("M", ms)
+else:
+    print("Y M", ys)
