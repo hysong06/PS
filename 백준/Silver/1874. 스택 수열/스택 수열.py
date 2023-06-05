@@ -11,11 +11,11 @@ actions = []
 for target in sequence:
     while pushed <= target:
         stack.append(pushed)
-        actions += "+"
+        actions.append("+")
         pushed += 1
 
     if stack.pop() == target:
-        actions += "-"
+        actions.append("-")
     else:
         print("NO")
         break
