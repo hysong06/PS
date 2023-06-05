@@ -15,4 +15,3 @@ for i, value in enumerate(A):
     A[i] = heap[0][0]  # reuse A
 
 print(*A)
-;
