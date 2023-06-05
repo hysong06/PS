@@ -1,13 +1,14 @@
 import sys
 
 input = sys.stdin.readline
+n = int(input())
+sequence = [int(input()) for _ in range(n)]
+
 pushed = 1
 stack = []
 actions = []
 
-for _ in range(int(input())):
-    target = int(input())
-
+for target in sequence:
     while pushed <= target:
         stack.append(pushed)
         actions += "+"
@@ -16,5 +17,8 @@ for _ in range(int(input())):
     if stack[-1] == target:
         stack.pop()
         actions += "-"
-
-print("NO" if stack else "\n".join(actions))
+    else:
+        print("NO")
+        break
+else:
+    print("\n".join(actions))
