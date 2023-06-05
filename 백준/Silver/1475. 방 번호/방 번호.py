@@ -1,9 +1,8 @@
-import collections
+counter = [0] * 10
+for i in input():
+    counter[(int(i))] += 1
 
-counter = collections.Counter(input())
+counter[6], counter[9] =\
+    (counter[6] + counter[9]) // 2, (counter[6] + counter[9] + 1) // 2
 
-answer = (counter["6"] + counter["9"] + 1) // 2
-counter["6"] = counter["9"] = 0
-answer = max(answer, max(counter.values()))
-
-print(answer)
+print(max(counter))
