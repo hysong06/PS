@@ -7,11 +7,10 @@ for _ in range(N):
     S, Y = map(int, input().split())
     students[Y - 1][S] += 1
 
-rooms = 0
-
-for year in range(6):
-    for sex in range(2):
-        rooms += students[year][sex] // K
-        rooms += 0 if students[year][sex] % K == 0 else 1
-
-print(rooms)
+print(
+    sum(
+        (students[year][sex] // K) + (0 if students[year][sex] % K == 0 else 1)
+        for year in range(6)
+        for sex in range(2)
+    )
+)
