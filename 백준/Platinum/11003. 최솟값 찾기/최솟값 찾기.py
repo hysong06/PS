@@ -5,6 +5,7 @@ input = sys.stdin.readline
 N, L = map(int, input().split())
 A = list(map(int, input().split()))
 prevs = collections.deque()
+results = []
 
 for i, cur in enumerate(A):
     while prevs and prevs[0][0] <= i - L:
@@ -12,6 +13,8 @@ for i, cur in enumerate(A):
     while prevs and prevs[-1][1] >= cur:
         prevs.pop()
 
-    prevs.append((i, A[i]))
+    prevs.append((i, cur))
 
-    print(prevs[0][1], end=" ")
+    results.append(prevs[0][1])
+
+print(*results)
