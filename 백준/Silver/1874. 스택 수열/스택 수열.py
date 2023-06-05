@@ -14,8 +14,7 @@ for target in sequence:
         actions += "+"
         pushed += 1
 
-    if stack[-1] == target:
-        stack.pop()
+    if stack.pop() == target:
         actions += "-"
     else:
         print("NO")
