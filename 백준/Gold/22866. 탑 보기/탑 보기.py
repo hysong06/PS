@@ -25,8 +25,8 @@ def solution(buildings):
 solution(data[:])
 solution(data[::-1])
 
-for c, n in zip(count[1:], nearest[1:]):
-    if c == 0:
-        print(c)
+for i in range(1, N + 1):
+    if count[i] == 0:
+        print(0)
     else:
-        print(c, n)
+        print(count[i], nearest[i])
