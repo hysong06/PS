@@ -15,18 +15,18 @@ def solution(buildings):
             visibles.pop()
 
         count[idx] += len(visibles)
-        if visibles and abs(visibles[-1][0] - idx) <= abs(nearest[idx] - idx):
+        if visibles and abs(visibles[-1][0] - idx) < abs(nearest[idx] - idx):
             nearest[idx] = visibles[-1][0]
 
         visibles.append((idx, height))
 
 
 # main
-solution(data[::-1])
 solution(data[:])
+solution(data[::-1])
 
-for v, n in zip(count[1:], nearest[1:]):
-    if v == 0:
-        print(v)
+for c, n in zip(count[1:], nearest[1:]):
+    if c == 0:
+        print(c)
     else:
-        print(v, n)
+        print(c, n)
