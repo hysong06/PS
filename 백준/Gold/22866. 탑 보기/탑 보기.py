@@ -27,6 +27,6 @@ solution(data[::-1])
 
 for i in range(1, N + 1):
     if count[i] == 0:
-        print(0)
+        print(count[i])
     else:
         print(count[i], nearest[i])
