@@ -2,14 +2,15 @@ import bisect
 import sys
 
 # the sieve of Eratosthenes
-max_k = 1299709
-primes = set(range(2, max_k + 1))
+is_prime = [True] * (1299709 + 1)
 
-for i in range(2, max_k + 1):
-    if i in primes:
-        primes -= set(range(i * i, max_k + 1, i))
+is_prime[0] = is_prime[1] = False
+for i in range(2, len(is_prime)):
+    if is_prime[i]:
+        for k in range(i * i, len(is_prime), i):
+            is_prime[k] = False
 
-sorted_primes = sorted(primes)
+sorted_primes = [i for i in range(2, len(is_prime)) if is_prime[i]]
 
 
 # main
@@ -18,7 +19,7 @@ input = sys.stdin.readline
 for _ in range(int(input())):
     k = int(input())
 
-    if k in primes:
+    if is_prime[k]:
         print(0)
         continue
 
