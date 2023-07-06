@@ -24,4 +24,4 @@ while queue:
         queue.append((nr, nc))
         campus[nr][nc] = "X"  # visit check
 
-print(encounter if encounter > 0 else "TT")
+print(encounter if encounter else "TT")
