@@ -1,10 +1,10 @@
+import collections
 import itertools
 import sys
 
 input = sys.stdin.readline
-T = int(input())
 
-for _ in range(T):
+for _ in range(int(input())):
     N = int(input())
     mbtis = input().split()
 
@@ -12,12 +12,16 @@ for _ in range(T):
         print(0)
         continue
 
-    print(
-        min(
-            sum(
-                int(a[i] != b[i]) + int(b[i] != c[i]) + int(c[i] != a[i])
-                for i in range(4)
-            )
-            for a, b, c in itertools.combinations(mbtis, 3)
+    min_dist = float("inf")
+
+    for a, b, c in itertools.combinations(mbtis, 3):
+        counter = collections.Counter(a + b + c)
+        dist = (
+            counter["E"] * counter["I"]
+            + counter["S"] * counter["N"]
+            + counter["T"] * counter["F"]
+            + counter["J"] * counter["P"]
         )
-    )
+        min_dist = min(dist, min_dist)
+
+    print(min_dist)
