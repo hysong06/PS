@@ -16,12 +16,12 @@ def dfs(start, end):
 
     while True:
         cur, path_len = stack.pop()
-        if cur == end:
-            return path_len
-
         if visit[cur]:
             continue
         visit[cur] = True
+
+        if cur == end:
+            return path_len
 
         for nxt, weight in graph[cur]:
             if visit[nxt]:
