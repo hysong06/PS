@@ -9,17 +9,12 @@ for number in range(2023, N + 1):
     if number.count("2") < 2 or "0" not in number or "3" not in number:
         continue
 
-    def search(idx, target):
-        while idx < len(number) and number[idx] != target:
-            idx += 1
-        return idx
+    x = number[number.find("2") + 1 :]
+    y = x[x.find("0") + 1 :]
+    z = y[y.find("2") + 1 :]
+    w = z[z.find("3") + 1 :]
 
-    x = search(0, "2")
-    y = search(x + 1, "0")
-    z = search(y + 1, "2")
-    w = search(z + 1, "3")
-
-    if x < y < z < w < len(number):
+    if len(x) > len(y) > len(z) > len(w):
         count += 1
 
 print(count)
