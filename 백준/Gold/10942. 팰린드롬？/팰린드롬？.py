@@ -1,23 +1,23 @@
 import sys
 
 input = sys.stdin.readline
+
+# len(arr) == len(dp) == N + 1
 N = int(input())
-nums = ["0", *(input().split())]  # len(nums) == N + 1
-memo = [[-1] * (N + 1) for _ in range(N + 1)]
+arr = ["0", *(input().split())]
+dp = [[False] * (N + 1) for _ in range(N + 1)]
 
-for i in range(1, N + 1):
-    memo[i][i] = 1
+# tabulation
+dp[N][N] = True
+for i in range(1, len(dp) - 1):
+    dp[i][i] = True
+    dp[i][i + 1] = arr[i] == arr[i + 1]
 
+for j in range(3, len(dp)):
+    for i in range(1, j - 1):
+        dp[i][j] = arr[i] == arr[j] and dp[i + 1][j - 1]
 
-def is_palindrome(l, r):
-    if memo[l][r] == -1:
-        memo[l][r] = int(
-            nums[l] == nums[r]
-            if r - l == 1
-            else nums[l] == nums[r] and is_palindrome(l + 1, r - 1)
-        )
-    return memo[l][r]
-
-
+# result
 for _ in range(int(input())):
-    print(is_palindrome(*map(int, input().split())))
+    S, E = map(int, input().split())
+    print(int(dp[S][E]))
