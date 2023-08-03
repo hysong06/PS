@@ -21,3 +21,4 @@ for j in range(3, len(dp)):
 for _ in range(int(input())):
     S, E = map(int, input().split())
     print(int(dp[S][E]))
+    
