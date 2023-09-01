@@ -4,34 +4,40 @@ import sys
 # inits
 input = sys.stdin.readline
 N = int(input())
-graph = [None] * (N + 1)
+graph = [(0, 0) for _ in range(N + 1)]
 root = set(range(1, N + 1))
 
 for _ in range(N):
-    n, a, b = map(int, input().split())
-    graph[n] = (a, b)
-    root.discard(a)
-    root.discard(b)
+    n, l, r = map(int, input().split())
+    graph[n] = (l, r)
+    root.discard(l)
+    root.discard(r)
 
 root = root.pop()
 
 
-# make dfs_tree made by inorder traversal
+# 1. make dfs_tree by inorder traversal
+# 2. get the column where each nodes locate by using dfs_tree
 def dfs(node):
-    if node != -1:
-        dfs(graph[node][0])
-        dfs_tree.append(node)
-        dfs(graph[node][1])
+    l, r = graph[node]
+    if l != -1:
+        dfs(l)
+    dfs_tree.append(node)
+    if r != -1:
+        dfs(r)
 
 
 dfs_tree = [0]
 dfs(root)
 
+column_of = [0] * (N + 1)
+for i, n in enumerate(dfs_tree):
+    column_of[n] = i
 
-# get the answer
+
+# get the answer: (ans_level, max_width)
 level, ans_level = 1, 0
 max_width = 0
-column_of = {n: i for i, n in enumerate(dfs_tree[1:], start=1)}
 row = collections.deque([root])
 
 while row:
@@ -40,8 +46,7 @@ while row:
         ans_level = level
 
     for _ in range(len(row)):
-        p = row.popleft()
-        l, r = graph[p]
+        l, r = graph[row.popleft()]
         if l != -1:
             row.append(l)
         if r != -1:
