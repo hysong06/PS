@@ -1,30 +1,27 @@
-import sys
 import collections
+import sys
 
 # inits
 input = sys.stdin.readline
 N = int(input())
-graph = dict()
-is_child = [False] * (N + 1)
+graph = [None] * (N + 1)
+root = set(range(1, N + 1))
 
 for _ in range(N):
     n, a, b = map(int, input().split())
     graph[n] = (a, b)
-    if a != -1:
-        is_child[a] = True
-    if b != -1:
-        is_child[b] = True
+    root.discard(a)
+    root.discard(b)
 
-root = is_child.index(False, 1)
+root = root.pop()
 
 
-# make dfs_tree made by preorder traversal
+# make dfs_tree made by inorder traversal
 def dfs(node):
-    if node not in graph:
-        return
-    dfs(graph[node][0])
-    dfs_tree.append(node)
-    dfs(graph[node][1])
+    if node != -1:
+        dfs(graph[node][0])
+        dfs_tree.append(node)
+        dfs(graph[node][1])
 
 
 dfs_tree = [0]
@@ -32,24 +29,24 @@ dfs(root)
 
 
 # get the answer
-ans_level, max_width = 0, 0
+level, ans_level = 1, 0
+max_width = 0
 column_of = {n: i for i, n in enumerate(dfs_tree[1:], start=1)}
-nodes = collections.deque([root])  # nodes at the same level
+row = collections.deque([root])
 
-for level in range(1, N + 1):
-    if not nodes:
-        break
-
-    if (width := column_of[nodes[-1]] - column_of[nodes[0]] + 1) > max_width:
+while row:
+    if (width := column_of[row[-1]] - column_of[row[0]] + 1) > max_width:
         max_width = width
         ans_level = level
 
-    for _ in range(len(nodes)):
-        p = nodes.popleft()
-        l, r = graph[p][0], graph[p][1]
+    for _ in range(len(row)):
+        p = row.popleft()
+        l, r = graph[p]
         if l != -1:
-            nodes.append(l)
+            row.append(l)
         if r != -1:
-            nodes.append(r)
+            row.append(r)
+
+    level += 1
 
 print(ans_level, max_width)
