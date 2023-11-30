@@ -6,7 +6,6 @@ input = sys.stdin.readline
 for _ in range(int(input())):
     n = int(input())
     prefer = {s: t for s, t in enumerate(map(int, input().split()), start=1)}
-    left = n
 
     # dfs, return the size of cycle
     def find_cycle(student, order):
@@ -21,4 +20,4 @@ for _ in range(int(input())):
             order[choice] = len(order) + 1
             return find_cycle(choice, order)
 
-    print(left - sum(find_cycle(i, {i: 1}) for i in range(1, n + 1)))
+    print(n - sum(find_cycle(i, {i: 1}) for i in range(1, n + 1)))
