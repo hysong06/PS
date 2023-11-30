@@ -8,7 +8,7 @@ for _ in range(int(input())):
     prefer = {s: t for s, t in enumerate(map(int, input().split()), start=1)}
     left = n
 
-    # dfs
+    # dfs, return the size of cycle
     def find_cycle(student, order):
         if student not in prefer:  # if already checked
             return 0
@@ -16,7 +16,7 @@ for _ in range(int(input())):
         del prefer[student]  # check
 
         if choice in order:
-            return len(order) + 1 - order[choice]  # return the size of cycle
+            return len(order) + 1 - order[choice]
         else:
             order[choice] = len(order) + 1
             return find_cycle(choice, order)
